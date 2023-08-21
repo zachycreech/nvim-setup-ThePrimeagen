@@ -68,13 +68,14 @@ return require('packer').startup(function(use)
 		  {'rafamadriz/friendly-snippets'},
 	  }
   }
-
   use("folke/zen-mode.nvim")
   use({ "codota/tabnine-nvim", run = "./dl_binaries.sh" })
   use("eandrju/cellular-automaton.nvim")
   use("laytan/cloak.nvim")
   use('ThePrimeagen/vim-be-good')
   use('jose-elias-alvarez/null-ls.nvim')
+  use('tpope/vim-commentary')
+  use('mg979/vim-visual-multi')
 
 end)
 

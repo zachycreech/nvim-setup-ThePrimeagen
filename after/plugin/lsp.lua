@@ -38,9 +38,7 @@ lsp.set_preferences({
 
 lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
-	vim.keymap.set("n", "gd", function()
-		vim.lsp.buf.definition()
-	end, opts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "K", function()
 		vim.lsp.buf.hover()
 	end, opts)
@@ -91,13 +89,17 @@ local null_ls = require("null-ls")
 
 null_ls.setup({
     sources = {
-        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.prettier.with({
+            prefer_local = "node_modules/.bin",
+            dynamic_command = function() return 'prettier' end,}),
         null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.completion.spell,
+        null_ls.builtins.formatting.stylua,
+
     },
 })
 
 
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = false,
 })
