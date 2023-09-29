@@ -92,7 +92,6 @@ null_ls.setup({
         null_ls.builtins.formatting.prettier.with({
             prefer_local = "node_modules/.bin",
             dynamic_command = function() return 'prettier' end,}),
-        null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.completion.spell,
         null_ls.builtins.formatting.stylua,
 
