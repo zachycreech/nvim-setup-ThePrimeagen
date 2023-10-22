@@ -38,7 +38,10 @@ lsp.set_preferences({
 
 lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+
+	vim.keymap.set("n", "gd", function()
+		vim.lsp.buf.definition()
+	end, opts)
 	vim.keymap.set("n", "K", function()
 		vim.lsp.buf.hover()
 	end, opts)
@@ -68,39 +71,8 @@ lsp.on_attach(function(client, bufnr)
 	end, opts)
 end)
 
-
-lsp.format_on_save({
-  format_opts = {
-    async = false,
-    timeout_ms = 10000,
-  },
-  servers = {
-    ['rust_analyzer'] = {'rust'},
-    -- if you have a working setup with null-ls
-    -- you can specify filetypes it can format.
-    ['null-ls'] = {'javascript', 'typescript', 'gofmt', 'golines','goimports_reviser'},
-  }
-})
-
 lsp.setup()
 
-
-local null_ls = require("null-ls")
-
-null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.prettier.with({
-            prefer_local = "node_modules/.bin",
-            dynamic_command = function() return 'prettier' end,}),
-        null_ls.builtins.completion.spell,
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.goimports_reviser,
-        null_ls.builtins.formatting.gofmt,
-        null_ls.builtins.formatting.golines,
-    },
-})
-
-
 vim.diagnostic.config({
-	virtual_text = false,
+	virtual_text = true,
 })
