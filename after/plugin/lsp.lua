@@ -78,7 +78,7 @@ lsp.format_on_save({
     ['rust_analyzer'] = {'rust'},
     -- if you have a working setup with null-ls
     -- you can specify filetypes it can format.
-    ['null-ls'] = {'javascript', 'typescript'},
+    ['null-ls'] = {'javascript', 'typescript', 'gofmt', 'golines','goimports_reviser'},
   }
 })
 
@@ -94,7 +94,9 @@ null_ls.setup({
             dynamic_command = function() return 'prettier' end,}),
         null_ls.builtins.completion.spell,
         null_ls.builtins.formatting.stylua,
-
+        null_ls.builtins.formatting.goimports_reviser,
+        null_ls.builtins.formatting.gofmt,
+        null_ls.builtins.formatting.golines,
     },
 })
 
