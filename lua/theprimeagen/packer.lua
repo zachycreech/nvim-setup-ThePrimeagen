@@ -22,6 +22,8 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+  use("joshdick/onedark.vim")
+
 	use({
 		"folke/trouble.nvim",
 		config = function()
